@@ -3,181 +3,260 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Java Full Stack — 16 Week Interview Tracker</title>
+<title>Java Full Stack Expert — 16 Week Master Tracker</title>
 <style>
-  :root{
-    --bg:#f5f7ff; --card:#fff; --text:#172033; --muted:#68738a;
-    --primary:#6c5ce7; --secondary:#00b894; --accent:#fd79a8;
-    --orange:#e17055; --blue:#0984e3; --yellow:#fdcb6e;
-    --border:#e9eaf3; --shadow:0 10px 30px rgba(40,45,80,.10);
-  }
-  *{box-sizing:border-box}
-  body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:linear-gradient(135deg,#f7f8ff,#eefcff);color:var(--text)}
-  .hero{background:linear-gradient(135deg,#5f27cd,#0984e3 55%,#00b894);color:white;padding:32px 20px 38px}
-  .hero-inner{max-width:1180px;margin:auto}
-  h1{margin:0 0 8px;font-size:clamp(28px,5vw,46px)}
-  .hero p{margin:0;opacity:.9;font-size:16px}
-  .container{max-width:1180px;margin:-18px auto 50px;padding:0 16px}
-  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-  .stat{background:var(--card);border-radius:18px;padding:18px;box-shadow:var(--shadow)}
-  .stat .num{font-size:28px;font-weight:800}.stat .label{color:var(--muted);font-size:13px;margin-top:3px}
-  .progress-card{margin-top:16px;background:white;border-radius:20px;padding:20px;box-shadow:var(--shadow)}
-  .progress-head{display:flex;justify-content:space-between;gap:12px;align-items:center;font-weight:700}
-  .bar{height:14px;background:#ececf6;border-radius:99px;overflow:hidden;margin-top:12px}
-  .fill{height:100%;width:0;background:linear-gradient(90deg,#6c5ce7,#00b894);border-radius:99px;transition:.35s}
-  .controls{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
-  button{border:0;border-radius:12px;padding:10px 14px;font-weight:700;cursor:pointer}
-  .btn-primary{background:var(--primary);color:white}.btn-light{background:#f0efff;color:#5145b5}
-  .week-nav{display:flex;gap:8px;overflow:auto;margin:20px 0 12px;padding-bottom:4px}
-  .week-btn{background:white;color:#5d667a;box-shadow:0 3px 12px rgba(30,40,80,.07);min-width:86px}
-  .week-btn.active{background:var(--primary);color:white}
-  .week-btn.done{border:2px solid var(--secondary)}
-  .week-card{background:white;border-radius:22px;box-shadow:var(--shadow);overflow:hidden}
-  .week-header{padding:22px;background:linear-gradient(135deg,#f1edff,#e9fbff)}
-  .week-header h2{margin:0 0 5px}.week-header p{margin:0;color:var(--muted)}
-  .day-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;padding:18px}
-  .day{border:1px solid var(--border);border-radius:15px;padding:12px;min-height:145px;background:#fff}
-  .day.today{outline:3px solid #c8c1ff}
-  .day h3{margin:0 0 8px;font-size:13px;color:var(--primary)}
-  label.task{display:flex;gap:8px;align-items:flex-start;margin:9px 0;font-size:13px;line-height:1.35;cursor:pointer}
-  input[type=checkbox]{accent-color:var(--secondary);width:17px;height:17px;flex:none}
-  .topic-list{padding:0 18px 22px}
-  .topic-list h3{margin:4px 0 12px}
-  .topic{display:flex;gap:10px;align-items:flex-start;padding:11px 0;border-bottom:1px dashed #ddd}
-  .topic:last-child{border-bottom:0}.topic small{display:block;color:var(--muted);margin-top:2px}
-  .tag{display:inline-block;padding:3px 8px;border-radius:99px;font-size:11px;font-weight:800;background:#fff0f6;color:#d6336c;margin-left:5px}
-  .footer-note{margin-top:16px;color:var(--muted);font-size:13px;text-align:center}
-  @media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}.day-grid{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:520px){.stats{grid-template-columns:1fr 1fr}.day-grid{grid-template-columns:1fr}.hero{padding-top:24px}}
+:root{--bg:#f5f7ff;--card:#fff;--text:#172033;--muted:#68738a;--p:#6c5ce7;--g:#00b894;--pink:#fd79a8;--blue:#0984e3;--orange:#e17055;--yellow:#fdcb6e;--border:#e7e8f2;--shadow:0 10px 30px rgba(40,45,80,.10)}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:linear-gradient(135deg,#f7f8ff,#eefcff);color:var(--text)}
+.hero{background:linear-gradient(135deg,#5f27cd,#0984e3 55%,#00b894);color:#fff;padding:30px 18px 38px}.hero-in{max-width:1250px;margin:auto}h1{font-size:clamp(28px,5vw,46px);margin:0 0 8px}.hero p{margin:0;opacity:.92}
+.container{max-width:1250px;margin:-18px auto 50px;padding:0 14px}.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.stat,.panel,.week-card{background:#fff;border-radius:19px;box-shadow:var(--shadow)}.stat{padding:16px}.num{font-size:27px;font-weight:850}.label{font-size:12px;color:var(--muted)}
+.panel{margin-top:14px;padding:18px}.progress-head{display:flex;justify-content:space-between;font-weight:800}.bar{height:14px;background:#ececf6;border-radius:99px;overflow:hidden;margin-top:10px}.fill{height:100%;width:0;background:linear-gradient(90deg,var(--p),var(--g));transition:.3s}
+.controls{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}button{border:0;border-radius:11px;padding:9px 13px;font-weight:750;cursor:pointer}.primary{background:var(--p);color:#fff}.light{background:#efedff;color:#5449bd}.danger{background:#fff0f0;color:#c0392b}
+.week-nav{display:flex;gap:7px;overflow:auto;margin:17px 0 12px;padding-bottom:4px}.week-btn{background:#fff;color:#586278;box-shadow:0 3px 12px #dfe2ee;min-width:82px}.week-btn.active{background:var(--p);color:#fff}.week-btn.done{border:2px solid var(--g)}
+.week-card{overflow:hidden}.week-head{padding:21px;background:linear-gradient(135deg,#f1edff,#e9fbff)}.week-head h2{margin:0 0 4px}.week-head p{margin:0;color:var(--muted)}
+.day-tabs{display:flex;gap:8px;overflow:auto;padding:15px 16px 5px}.day-tab{background:#f2f3fa;color:#596278;min-width:76px}.day-tab.active{background:#6c5ce7;color:#fff}
+.day-content{padding:14px 18px 22px}.day-header-btn{width:100%;text-align:left;background:linear-gradient(135deg,#f8f6ff,#f1fcff);border:1px solid var(--border);padding:16px;border-radius:15px;display:flex;justify-content:space-between;align-items:center;gap:12px}.day-header-btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(80,70,150,.10)}.day-header-btn .arrow{font-size:20px;transition:.2s}.day-header-btn.open .arrow{transform:rotate(180deg)}.concept-panel{margin-top:12px}.hidden-panel{display:none}.concept-note{display:block;font-size:13px;color:var(--muted);margin-top:5px}.day-title{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.day-title h3{margin:0;font-size:23px}.badge{display:inline-block;background:#fff0f6;color:#d6336c;padding:5px 9px;border-radius:99px;font-size:11px;font-weight:800}
+.section{margin-top:15px;border:1px solid var(--border);border-radius:15px;padding:14px;background:#fff}.section h4{margin:0 0 9px}.task{display:flex;gap:9px;align-items:flex-start;padding:7px 3px;line-height:1.35;font-size:14px;cursor:pointer}.task input{width:18px;height:18px;accent-color:var(--g);flex:none}.task small{display:block;color:var(--muted)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.tip{background:linear-gradient(135deg,#fff8e8,#fff);border-color:#f6dfad}.interview{background:linear-gradient(135deg,#f0edff,#fff);border-color:#dcd5ff}
+.week-overview{padding:0 18px 22px}.week-overview h3{margin-bottom:10px}.topic-row{display:flex;gap:9px;padding:10px 0;border-bottom:1px dashed #ddd}.topic-row:last-child{border:0}.topic-row input{accent-color:var(--g);width:18px;height:18px}.topic-row small{display:block;color:var(--muted);margin-top:2px}
+.note{text-align:center;color:var(--muted);font-size:13px;margin-top:15px}
+@media(max-width:1000px){.stats{grid-template-columns:repeat(3,1fr)}}@media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:1fr}.day-title{display:block}}
 </style>
 </head>
 <body>
-<header class="hero"><div class="hero-inner">
-  <h1>🚀 Java Full Stack Mastery</h1>
-  <p>16 weeks • Learn → Build → Revise → Interview • Your progress is saved automatically.</p>
+<header class="hero"><div class="hero-in">
+<h1>🚀 Java Full Stack Expert — 4 Month Tracker</h1>
+<p>112 study days • detailed subtopic checklists • coding • interview questions • revision • progress saved automatically</p>
 </div></header>
-
 <main class="container">
-  <section class="stats">
-    <div class="stat"><div class="num" id="doneCount">0</div><div class="label">Topics completed</div></div>
-    <div class="stat"><div class="num" id="totalCount">0</div><div class="label">Total topics</div></div>
-    <div class="stat"><div class="num" id="percent">0%</div><div class="label">Overall progress</div></div>
-    <div class="stat"><div class="num" id="weekPercent">0%</div><div class="label">Current week</div></div>
-  </section>
-
-  <section class="progress-card">
-    <div class="progress-head"><span>🎯 4-Month Interview Goal</span><span id="progressText">0 / 0</span></div>
-    <div class="bar"><div class="fill" id="overallFill"></div></div>
-    <div class="controls">
-      <button class="btn-primary" onclick="markCurrentWeekDone()">Complete current week</button>
-      <button class="btn-light" onclick="resetAll()">Reset all progress</button>
-    </div>
-  </section>
-
-  <nav class="week-nav" id="weekNav"></nav>
-  <section class="week-card">
-    <div class="week-header">
-      <h2 id="weekTitle"></h2><p id="weekSubtitle"></p>
-    </div>
-    <div class="day-grid" id="dayGrid"></div>
-    <div class="topic-list"><h3>📚 Week topics</h3><div id="topicList"></div></div>
-  </section>
-  <div class="footer-note">💡 Missed a day? No problem. The tracker stays on the same week until you finish it. Never skip a week just because one day was missed.</div>
+<div class="stats">
+<div class="stat"><div class="num" id="done">0</div><div class="label">Subtopics completed</div></div>
+<div class="stat"><div class="num" id="total">0</div><div class="label">Total subtopics</div></div>
+<div class="stat"><div class="num" id="pct">0%</div><div class="label">Overall progress</div></div>
+<div class="stat"><div class="num" id="wpct">0%</div><div class="label">Current week</div></div>
+<div class="stat"><div class="num" id="dpct">0%</div><div class="label">Current day</div></div>
+</div>
+<div class="panel">
+<div class="progress-head"><span>🎯 16-Week Interview Goal</span><span id="count">0 / 0</span></div>
+<div class="bar"><div class="fill" id="fill"></div></div>
+<div class="controls">
+<button class="primary" onclick="completeDay()">Complete day</button>
+<button class="primary" onclick="completeWeek()">Complete week</button>
+<button class="light" onclick="goToday()">Open current day</button>
+<button class="danger" onclick="resetAll()">Reset all</button>
+</div>
+</div>
+<nav class="week-nav" id="weeks"></nav>
+<section class="week-card">
+<div class="week-head"><h2 id="weekTitle"></h2><p id="weekSub"></p></div>
+<div class="day-tabs" id="days"></div>
+<div class="day-content" id="dayContent"></div>
+<div class="week-overview"><h3>📚 Week overview</h3><div id="overview"></div></div>
+</section>
+<div class="note">💡 Miss a day? No problem. The tracker does not force you to move forward. Finish the current day/week before moving on.</div>
 </main>
-
 <script>
-const weeks = [
-["Java Foundations + DSA","Build strong core Java and problem-solving habits",[
-"Java syntax, variables, data types, operators","OOP: class, object, encapsulation, inheritance","Polymorphism, abstraction, interfaces","String, StringBuilder, StringBuffer","Arrays + two-pointer patterns","Big-O + 5 easy coding problems","Weekly revision + mock interview"]],
+const W=[
+["Java Foundations + DSA","Build strong Core Java and problem-solving fundamentals",[
+["Java setup, syntax & execution",["JDK vs JRE vs JVM","Source → bytecode → JVM execution","javac and java commands","Primitive vs reference types","Variables, literals and type casting","Operators and control flow","Packages and imports","Read and run a small Java program"],["Write 3 small Java programs","Why is Java platform independent?","Explain JDK/JRE/JVM in 60 seconds"]],
+["OOP: classes & encapsulation",["Class vs object","Fields and methods","Constructors","this keyword","Access modifiers","Encapsulation","Static vs instance members","Object lifecycle basics"],["Create a BankAccount class","Explain encapsulation with a real example","What is the difference between class and object?"]],
+["Inheritance, abstraction & polymorphism",["extends and inheritance","super keyword","Method overriding","Runtime polymorphism","Method overloading","Abstract classes","Interfaces","Composition vs inheritance"],["Build Shape/Circle/Rectangle hierarchy","Explain compile-time vs runtime polymorphism","When would you prefer composition?"]],
+["String & memory concepts",["String immutability","String pool","== vs equals","StringBuilder","StringBuffer","Common String methods","String concatenation performance","String interview traps"],["Solve 5 String coding problems","Explain why String is immutable","String vs StringBuilder vs StringBuffer"]],
+["Arrays + two pointers",["Array traversal","Insert/delete/search","Two-pointer pattern","Reverse array/string","Pair-sum pattern","Sliding-window introduction","Time/space complexity","Edge cases"],["Solve 5 array problems","Explain O(n) vs O(n²)","Practice one timed problem"]],
+["Big-O + coding practice",["O(1), O(log n), O(n), O(n log n), O(n²)","Space complexity","Nested loops","Recursion complexity basics","Choose efficient approach","Dry-run technique","Test edge cases"],["Solve 5 easy DSA questions","Explain complexity of each solution","Do one 30-minute timed round"]],
+["Week 1 revision + mock",["Revise all Java fundamentals","Revise OOP","Revise String concepts","Revise arrays","Review mistakes","Create personal interview notes","Speak answers aloud"],["10 mixed coding questions","20 Java rapid-fire questions","Record one mock explanation"]]
+]],
 ["Collections + Modern Java","Master the collections and Java 8+ features interviewers expect",[
-"List, Set, Map internals","HashMap internals + hashing","equals/hashCode contract","Comparable vs Comparator","Java 8 lambdas + functional interfaces","Streams: map/filter/reduce/grouping","Optional + Date/Time + revision"]],
+["List, Set & Queue",["ArrayList internals","LinkedList internals","Vector basics","HashSet","LinkedHashSet","TreeSet","Queue, Deque, PriorityQueue","Choosing the right collection"],["Implement a small collection-based program","ArrayList vs LinkedList","HashSet vs TreeSet"]],
+["Map fundamentals",["HashMap structure","Hashtable","LinkedHashMap","TreeMap","Map methods","Null key/value behavior","Ordering differences","Use cases"],["Build a word-frequency counter","HashMap vs Hashtable","TreeMap vs LinkedHashMap"]],
+["HashMap internals",["hashCode()","equals()","Bucket calculation","Collision handling","Linked list buckets","Treeification","Load factor","Capacity and resizing","put() flow","get() flow"],["Trace put/get manually","Explain HashMap without notes","Why capacity is power of 2?"]],
+["equals/hashCode + contracts",["Object.equals contract","Object.hashCode contract","Reference vs logical equality","Mutable keys problem","Custom key class","Comparator consistency","Common bugs"],["Create a custom Employee key","Demonstrate broken hashCode","Explain the contract in an interview"]],
+["Comparable & Comparator",["Comparable interface","compareTo()","Comparator interface","Lambda comparators","Multi-field sorting","Null handling","Stable sorting","TreeSet implications"],["Sort employees 3 ways","Comparable vs Comparator","What if compareTo returns 0?"]],
+["Lambdas + functional interfaces",["Lambda syntax","Predicate","Function","Consumer","Supplier","BiFunction","Method references","Effectively final variables"],["Write 10 lambda examples","Convert anonymous classes to lambdas","Explain functional interface"]],
+["Streams + Optional + revision",["Stream pipeline","filter/map/flatMap","sorted/distinct","collect","groupingBy","partitioningBy","reduce","Optional","Date/Time API"],["Solve 10 Stream problems","Explain lazy evaluation","Stream vs collection"]]
+]],
 ["Advanced Java + Concurrency","Write efficient, thread-safe Java",[
-"Exception handling + custom exceptions","Generics + wildcards","Immutability + records","Threads, Runnable, Callable","synchronized, volatile, locks","ExecutorService + CompletableFuture","Concurrency interview questions + revision"]],
+["Exceptions",["Checked vs unchecked","try/catch/finally","throw vs throws","Custom exceptions","Exception hierarchy","try-with-resources","Best practices","Global exception mindset"],["Create custom business exceptions","Explain checked vs unchecked","5 exception interview questions"]],
+["Generics",["Generic classes","Generic methods","Type parameters","Bounded types","extends wildcard","super wildcard","PECS","Type erasure"],["Write generic repository","Explain PECS","Why can't you use List<Object> for List<String>?"]],
+["Immutability + records",["Immutable class design","final fields","Defensive copies","String immutability","Records","Record limitations","Value-object thinking"],["Create immutable Employee","Convert DTO to record","Explain why immutability helps concurrency"]],
+["Threads & lifecycle",["Thread creation","Runnable","Callable","Future","Thread states","start vs run","sleep/join","Daemon threads"],["Create producer/consumer demo","Explain thread lifecycle","start() vs run()"]],
+["synchronized, volatile & locks",["Race conditions","Intrinsic monitor","synchronized method/block","volatile visibility","Atomic classes","ReentrantLock","Deadlock basics"],["Create and fix a race condition","Explain visibility vs atomicity","Deadlock example"]],
+["Executors + CompletableFuture",["ExecutorService","Thread pools","Callable/Future","ScheduledExecutorService","CompletableFuture stages","thenApply/thenCompose","exception handling","parallel tasks"],["Build parallel API calls","Explain fixed vs cached pool","CompletableFuture interview questions"]],
+["Concurrency revision",["Revise all concurrency concepts","Review common pitfalls","Review performance","Practice synchronization questions","Review code examples","Prepare 20 rapid-fire answers"],["2 concurrency coding problems","Mock concurrency interview","Explain race condition/deadlock"]]
+]],
 ["DSA Patterns","Become comfortable solving medium-level interview problems",[
-"Arrays + sliding window","Strings + frequency maps","Stack + queue","Linked list","Binary search","Recursion + backtracking basics","20-question timed mock"]],
+["Arrays + sliding window",["Fixed window","Variable window","Maximum/minimum window","Frequency map","Two pointers","Prefix sum basics","Edge cases"],["Solve 8 problems","Time each solution","Explain pattern recognition"]],
+["Strings + frequency maps",["Character frequency","Anagrams","Longest substring","Palindrome patterns","Sliding window","HashMap/HashSet usage","ASCII/Unicode considerations"],["Solve 8 string problems","Explain each approach","One 30-minute timed set"]],
+["Stack + queue",["Stack operations","Monotonic stack","Valid parentheses","Next greater element","Queue","Deque","BFS introduction"],["Solve 8 problems","Implement stack/queue","Explain monotonic stack"]],
+["Linked list",["Node structure","Traversal","Insert/delete","Reverse list","Fast/slow pointers","Cycle detection","Merge lists"],["Solve 8 linked-list problems","Implement reverse","Explain Floyd cycle detection"]],
+["Binary search",["Classic binary search","First/last occurrence","Search on answer","Rotated array","Boundary handling","Overflow-safe midpoint"],["Solve 8 binary-search problems","Explain invariant","One timed medium problem"]],
+["Recursion + backtracking",["Base case","Recursive tree","Call stack","Subsets","Permutations","Combination patterns","Pruning"],["Solve 6 problems","Draw recursion tree","Explain complexity"]],
+["DSA mock",["Mixed pattern selection","Time management","Dry run","Complexity","Debugging","Communication"],["20-question mock","Review every mistake","Create weak-topic list"]]
+]],
 ["SQL + Database","Become strong in SQL and relational database fundamentals",[
-"SELECT, WHERE, ORDER BY, GROUP BY","Joins: inner/left/right","Subqueries + CTE","Indexes + execution basics","Transactions + ACID","Normalization + isolation levels","SQL interview mock + 10 queries"]],
+["SQL basics",["SELECT","WHERE","ORDER BY","LIMIT","DISTINCT","CASE","NULL handling","Aggregate functions"],["Write 15 queries","Practice NULL cases","Explain query execution at high level"]],
+["Joins",["INNER JOIN","LEFT JOIN","RIGHT JOIN","FULL JOIN concept","Self join","Join conditions","Duplicate rows","Join vs subquery"],["Write 15 join queries","Solve employee/department problems","Explain LEFT JOIN"]],
+["Subqueries + CTE",["Scalar subquery","Correlated subquery","IN vs EXISTS","CTE","Multiple CTEs","Recursive CTE awareness","Readability"],["Write 10 subquery queries","Convert a subquery to CTE","EXISTS vs IN"]],
+["Indexes",["B-tree concept","Clustered vs non-clustered concept","Composite indexes","Selectivity","Covering index concept","Index trade-offs","EXPLAIN"],["Analyze 5 sample queries","Explain why indexes help","When an index hurts"]],
+["Transactions + ACID",["Atomicity","Consistency","Isolation","Durability","Commit/rollback","Isolation levels","Dirty/non-repeatable/phantom reads"],["Create transaction examples","Explain each isolation level","5 database interview questions"]],
+["Normalization + schema design",["1NF","2NF","3NF","Denormalization","Primary/foreign keys","Constraints","Cardinality","Practical schema design"],["Design e-commerce schema","Normalize a sample table","Explain trade-offs"]],
+["SQL mock + revision",["Revise joins","Revise indexes","Revise transactions","Revise normalization","Query optimization basics","Common interview traps"],["20 SQL queries","One timed SQL round","Explain 5 queries aloud"]]
+]],
 ["Spring Boot Core","Build production-style Spring Boot applications",[
-"Spring IoC + dependency injection","Bean lifecycle + scopes","Spring Boot auto-configuration","Configuration properties + profiles","REST controllers + DTOs","Validation + global exception handling","Actuator + revision"]],
+["IoC + Dependency Injection",["IoC","Dependency Injection","Constructor injection","Setter injection","Field injection","@Component","@Service","@Repository","ApplicationContext"],["Build a small DI example","Explain constructor injection","Bean creation flow"]],
+["Bean lifecycle + scopes",["Bean creation","Dependency injection phase","@PostConstruct","@PreDestroy","Singleton","Prototype","Request/session scope awareness","Bean lifecycle interview questions"],["Create lifecycle demo","Explain singleton scope","What happens during application startup?"]],
+["Auto-configuration",["Spring Boot starters","Auto-configuration","@Conditional annotations","Classpath-based configuration","application.properties","application.yml","Profiles"],["Inspect auto-config report","Create custom configuration","Explain auto-configuration"]],
+["Configuration + profiles",["@Value","@ConfigurationProperties","Profiles","Environment variables","Secrets concept","Configuration precedence","Externalized configuration"],["Create dev/test/prod profiles","Bind nested properties","Explain externalized config"]],
+["REST APIs + DTOs",["@RestController","@RequestMapping","HTTP methods","Path variables","Request params","Request body","ResponseEntity","DTO mapping","HTTP status codes"],["Build CRUD API","Return correct status codes","Explain DTO vs entity"]],
+["Validation + exceptions",["Bean Validation","@Valid","@NotNull/@NotBlank","Custom validation","@ControllerAdvice","ExceptionHandler","Error response design","Correlation IDs concept"],["Build validation layer","Create global exception handler","Design standard error JSON"]],
+["Actuator + revision",["Health endpoint","Metrics","Info","Logging basics","Profiles","Configuration review","REST best practices"],["Expose health endpoint","Create readiness-style check","Spring Boot mock interview"]]
+]],
 ["Spring Data JPA + Hibernate","Master ORM and database integration",[
-"Entity mapping + relationships","Fetch types + cascade","JPQL + native queries","Transactions + @Transactional","N+1 problem + EntityGraph","Pagination + auditing","JPA/Hibernate interview mock"]],
+["Entity mapping",["@Entity","@Id","GeneratedValue","Column","Table","Embeddable","Enum mapping","ID strategies"],["Map Employee entity","Compare ID strategies","Explain persistence context"]],
+["Relationships",["@OneToOne","@OneToMany","@ManyToOne","@ManyToMany","mappedBy","JoinColumn","JoinTable","Ownership"],["Build Order/OrderItem mapping","Explain owning side","Avoid accidental joins"]],
+["Fetch + cascade",["LAZY","EAGER","Cascade types","orphanRemoval","Fetch joins","LazyInitializationException","Entity graphs"],["Demonstrate N+1","Fix with fetch join","Explain LAZY vs EAGER"]],
+["JPQL + native queries",["JPQL syntax","Parameters","Projections","DTO queries","Native SQL","Named queries","Pagination","Sorting"],["Write 10 JPQL queries","Create DTO projection","Explain JPQL vs SQL"]],
+["Transactions",["@Transactional","Propagation","Rollback rules","Isolation","Read-only transactions","Transaction boundaries","Self-invocation pitfall"],["Create transactional service","Demonstrate rollback","Explain proxy limitation"]],
+["N+1 + performance",["N+1 problem","JOIN FETCH","EntityGraph","Batch fetching","Pagination pitfalls","First-level cache","Second-level cache concept"],["Measure query count","Fix N+1","Explain performance trade-offs"]],
+["JPA/Hibernate mock",["Persistence context","Dirty checking","Flush","Detach","Merge","Caching","Transactions","Common production issues"],["20 rapid-fire questions","Debug a mapping issue","Explain Hibernate lifecycle"]]
+]],
 ["Spring AOP + Security","Understand cross-cutting concerns and secure APIs",[
-"AOP concepts + proxies","Pointcut, advice, join point","Custom annotations + aspects","Spring Security architecture","Authentication vs authorization","JWT + role-based access","Security interview revision"]],
+["AOP fundamentals",["Cross-cutting concerns","Aspect","Join point","Advice","Pointcut","Weaving concept","Spring proxy model"],["Build logging aspect","Explain AOP use cases","Aspect vs interceptor"]],
+["Advice + pointcuts",["@Before","@After","@AfterReturning","@AfterThrowing","@Around","execution expression","within/annotation"],["Create timing aspect","Create annotation pointcut","Explain @Around"]],
+["Custom annotations + proxy traps",["Custom annotation","Annotation pointcut","JDK proxy","CGLIB proxy","Self-invocation","Final methods awareness"],["Create @TrackExecutionTime","Demonstrate proxy limitation","Explain proxy-based AOP"]],
+["Spring Security architecture",["Security filter chain","Authentication","Authorization","SecurityContext","UserDetails","PasswordEncoder","CSRF concept","CORS concept"],["Secure a REST API","Explain filter chain","Authentication vs authorization"]],
+["JWT",["JWT structure","Claims","Signature","Access token","Refresh token concept","Stateless authentication","Token expiry","Roles/authorities"],["Implement JWT flow","Explain token validation","Design refresh strategy"]],
+["RBAC + API security",["Roles","Authorities","Method security","@PreAuthorize","Password hashing","Endpoint rules","Secure error responses"],["Secure admin/user endpoints","Write authorization tests","Explain RBAC"]],
+["Security revision",["AOP revision","Security revision","JWT pitfalls","CORS/CSRF","Authentication flow","Authorization flow"],["20 security questions","Mock secure API design","Review OWASP basics"]]
+]],
 ["Microservices Fundamentals","Design and build reliable distributed services",[
-"Monolith vs microservices","Service discovery","API Gateway","OpenFeign + service communication","Resilience4j: retry/circuit breaker","Distributed configuration","Microservices interview mock"]],
+["Microservices architecture",["Monolith vs microservices","Bounded contexts","Service ownership","Database per service","Distributed systems challenges","When not to use microservices"],["Decompose an e-commerce system","Explain trade-offs","Identify service boundaries"]],
+["Service discovery",["Client-side discovery","Server-side discovery","Registry concept","Health checks","Load balancing","Service instances"],["Explain discovery flow","Design service registration","Failure scenarios"]],
+["API Gateway",["Routing","Authentication at gateway","Rate limiting concept","CORS","Aggregation","Gateway vs load balancer"],["Design gateway routes","Explain gateway responsibilities","Handle downstream failure"]],
+["OpenFeign + communication",["REST communication","OpenFeign","Timeouts","Serialization","Retries","Synchronous vs asynchronous calls"],["Call one service from another","Design timeout policy","Explain cascading failures"]],
+["Resilience4j",["Circuit breaker","Retry","Rate limiter","Bulkhead","Fallback","State transitions","Timeout strategy"],["Implement circuit breaker","Simulate failure","Explain open/half-open/closed"]],
+["Distributed configuration",["Central config concept","Environment separation","Secrets","Dynamic config awareness","Config failure","Versioning"],["Design config strategy","Explain secret handling","Failure scenario"]],
+["Microservices mock",["Architecture trade-offs","Communication","Resilience","Data consistency","Observability","Deployment"],["Design 5-service system","20 rapid-fire questions","One architecture mock"]]
+]],
 ["Kafka + Redis","Learn asynchronous systems and caching",[
-"Kafka topics, partitions, offsets","Producer + consumer","Consumer groups","Delivery semantics + retries","Kafka ordering + idempotency","Redis caching + TTL","Kafka + Redis architecture revision"]],
+["Kafka fundamentals",["Broker","Topic","Partition","Offset","Producer","Consumer","Replication","Leader/follower concept"],["Create topic/producer/consumer","Explain partitioning","Draw Kafka architecture"]],
+["Consumers + groups",["Consumer group","Partition assignment","Rebalancing","Offset commits","At-most-once","At-least-once","Exactly-once concept"],["Run two consumers","Observe group behavior","Explain rebalancing"]],
+["Kafka producer reliability",["acks","Retries","Idempotence","Batching","Compression","Ordering","Key selection"],["Configure reliable producer","Explain message ordering","Producer failure scenarios"]],
+["Kafka consumer reliability",["Manual commits","Retry topic concept","Dead-letter topic","Poison messages","Consumer lag","Backpressure"],["Design retry/DLT flow","Explain lag","Handle poison message"]],
+["Kafka architecture",["Partition strategy","Replication factor","Retention","Compaction","Scalability","Schema evolution concept"],["Design order-event pipeline","Explain scaling","Choose partition key"]],
+["Redis caching",["Key/value model","TTL","Cache-aside","Write-through concept","Eviction","Cache stampede","Distributed lock concept"],["Add cache to API","Measure cache hit/miss","Explain cache invalidation"]],
+["Kafka + Redis revision",["Event-driven architecture","Caching","Consistency","Failure handling","Observability","Interview scenarios"],["Design notification pipeline","20 rapid-fire questions","Architecture mock"]]
+]],
 ["AWS + Docker + CI/CD","Become cloud-ready for full-stack backend roles",[
-"Docker images + containers","Docker Compose","AWS IAM + S3","AWS RDS/Aurora basics","ECS/EKS concepts","CI/CD pipeline concepts","Deploy a Spring Boot service + revision"]],
+["Docker fundamentals",["Image vs container","Dockerfile","Layers","Ports","Volumes","Environment variables","Docker networking"],["Dockerize Spring Boot app","Run DB + app containers","Explain image layers"]],
+["Docker Compose",["Services","Networks","Volumes","Environment","Depends_on","Health checks","Local microservice setup"],["Create app+DB compose","Add Kafka/Redis conceptually","Explain service networking"]],
+["AWS IAM + S3",["IAM users/roles/policies","Least privilege","S3 buckets","Objects","Policies","Encryption concept","Presigned URLs"],["Upload/download from S3","Explain IAM role","Design secure S3 access"]],
+["AWS RDS/Aurora",["Managed relational DB","Backups","Multi-AZ concept","Read replicas","Connection pooling","Security groups"],["Connect Spring Boot to DB","Explain RDS vs Aurora","Production DB checklist"]],
+["ECS/EKS concepts",["Containers on AWS","ECS","EKS","Pods","Deployments","Services","Ingress concept","Secrets/config"],["Explain ECS vs EKS","Draw deployment architecture","Kubernetes basics revision"]],
+["CI/CD",["Build pipeline","Test stage","Artifact","Docker build","Registry","Deployment","Rollback","Environment promotion"],["Design CI/CD pipeline","Add automated tests","Explain blue/green concept"]],
+["Cloud deployment + revision",["Logs","Metrics","Health checks","Scaling","Security","Cost awareness","Deployment troubleshooting"],["Deploy a Spring Boot service conceptually","Prepare AWS interview answers","Cloud mock interview"]]
+]],
 ["React Foundations","Build the frontend layer confidently",[
-"HTML semantic basics","CSS flexbox + grid","JavaScript ES6 essentials","React components + JSX","Props + state + events","Hooks: useState + useEffect","Build a small CRUD UI"]],
+["HTML essentials",["Semantic HTML","Forms","Inputs","Labels","Accessibility basics","Tables","HTML5 APIs awareness"],["Build registration form","Use semantic tags","Explain accessibility choices"]],
+["CSS fundamentals",["Selectors","Box model","Display","Position","Flexbox","Grid","Responsive design","Media queries"],["Build responsive dashboard","Recreate a card layout","Explain flex vs grid"]],
+["JavaScript ES6",["let/const","Arrow functions","Destructuring","Spread/rest","Template literals","Modules","Promises","async/await"],["Solve 10 JS exercises","Explain event loop basics","Convert old syntax to ES6"]],
+["React components",["JSX","Functional components","Props","Component composition","Conditional rendering","Lists","Keys"],["Build reusable cards","Explain props vs state","Fix key warnings"]],
+["State + events",["useState","Event handlers","Controlled inputs","Lifting state","Derived state","State immutability"],["Build form + list","Explain state update batching","Avoid mutation"]],
+["Hooks",["useEffect","Dependency array","Cleanup","useMemo awareness","useCallback awareness","Custom hooks"],["Build API fetch hook","Explain effect lifecycle","Create one custom hook"]],
+["CRUD UI project",["Create/read/update/delete UI","Loading states","Error states","Empty states","Reusable components","Basic validation"],["Build small CRUD screen","Connect mock API","Prepare React interview questions"]]
+]],
 ["React Advanced + Integration","Connect frontend and backend like a full-stack engineer",[
-"React Router","Forms + validation","Context API","API calls with fetch/Axios","Authentication flow + token handling","Performance + reusable components","Integrate React with Spring Boot API"]],
+["React Router",["Routes","Nested routes","Params","Navigate","Protected routes","404 page"],["Build multi-page SPA","Implement protected route","Explain routing"]],
+["Forms + validation",["Controlled components","Validation","Error messages","Touched state","Submit handling","Reusable input"],["Build login form","Build registration form","Explain client vs server validation"]],
+["Context API",["Context","Provider","Consumer","useContext","Global state use cases","Avoiding overuse"],["Create auth context","Explain context trade-offs","Use context for theme/auth"]],
+["API integration",["fetch/Axios","GET/POST/PUT/DELETE","Headers","Interceptors concept","Loading","Errors","Abort/cancellation awareness"],["Connect React to Spring Boot","Handle API errors","Explain CORS"]],
+["Authentication flow",["Login API","JWT storage trade-offs","Authorization header","Refresh token concept","Logout","Protected routes"],["Build login flow","Secure route handling","Explain XSS/storage trade-offs"]],
+["Performance + reusable design",["Memoization","Component splitting","Lazy loading","Pagination","Debouncing","Reusable hooks","Error boundaries awareness"],["Optimize a slow component","Add pagination/debounce","Explain performance decisions"]],
+["Full-stack integration revision",["React revision","REST revision","CORS","JWT","Error handling","API contracts","Deployment awareness"],["Complete frontend-backend mini flow","20 rapid-fire questions","Full-stack mock"]]
+]],
 ["System Design","Learn to explain scalable systems in interviews",[
-"Requirements + estimation","Load balancing + caching","Database scaling + read replicas","Queues + async processing","URL shortener design","Chat application design","System design mock interview"]],
+["Requirements + estimation",["Functional requirements","Non-functional requirements","Scale estimation","Traffic","Storage","Latency","Availability"],["Estimate URL shortener","Ask clarifying questions","Present assumptions"]],
+["Load balancing + caching",["Load balancer","Horizontal scaling","Reverse proxy","Cache","Cache-aside","CDN concept","Cache invalidation"],["Design scalable read path","Explain cache placement","Failure scenario"]],
+["Database scaling",["Read replicas","Sharding concept","Partitioning","Indexes","Connection pooling","Consistency trade-offs"],["Scale a relational DB","Explain read/write separation","Choose SQL vs NoSQL"]],
+["Queues + async",["Message queue","Producer/consumer","Retries","DLQ","Backpressure","Async workflows","Eventual consistency"],["Design order processing","Explain synchronous vs async","Failure handling"]],
+["URL shortener design",["Requirements","API design","ID generation","Storage","Caching","Redirect path","Analytics"],["Draw full design","Explain bottlenecks","Do 45-minute mock"]],
+["Chat application design",["WebSocket","Connection management","Message persistence","Presence","Fan-out","Kafka/pub-sub concept","Scaling"],["Design WhatsApp-like system","Explain WebSocket scaling","Discuss offline messages"]],
+["System design mock",["Clarify requirements","Estimate scale","Architecture","APIs","DB","Cache","Queue","Failure handling","Trade-offs"],["2 complete mocks","Review recordings/notes","Prepare top 10 designs"]]
+]],
 ["Projects + Resume","Turn knowledge into evidence",[
-"Choose one production-style project","Design DB + APIs","Implement Spring Boot backend","Add Kafka/Redis where useful","Build React frontend","Dockerize + deploy","Resume + project explanation practice"]],
+["Project selection",["Choose production-style project","Define users","Define use cases","Define APIs","Define data model","Identify async flows"],["Select final project","Write requirements","Create architecture diagram"]],
+["Backend architecture",["Package structure","DTOs","Validation","Exception handling","Security","JPA","Transactions"],["Create Spring Boot skeleton","Implement 3 core APIs","Add tests"]],
+["Kafka/Redis integration",["Event design","Topic strategy","Producer/consumer","Retries","DLT concept","Cache strategy","Invalidation"],["Add one Kafka flow","Add Redis cache","Document trade-offs"]],
+["React frontend",["Component structure","Routing","Forms","API integration","Auth","Loading/error states","Responsive UI"],["Build main screens","Connect APIs","Implement auth"]],
+["Docker + deployment",["Dockerfile","Compose","Environment config","Logs","Health checks","Deployment plan"],["Containerize project","Prepare deployment","Create runbook"]],
+["Testing + quality",["JUnit","Mockito","Integration tests","API tests","Validation tests","Coverage","Code review checklist"],["Write meaningful tests","Fix quality issues","Prepare test explanation"]],
+["Resume + project interview",["Achievement bullets","Metrics","Architecture explanation","Challenges","Trade-offs","Failure story","STAR format"],["Update resume","Practice 30 project questions","Record project walkthrough"]]
+]],
 ["Final Interview Sprint","Consolidate everything and simulate the real interview",[
-"Java rapid-fire revision","Spring Boot/JPA/AOP revision","Microservices/Kafka/AWS revision","React/JavaScript revision","DSA timed round","System design + project deep dive","Full mock interview + weak-area revision"]]
+["Java rapid-fire",["OOP","Collections","HashMap","Streams","Generics","Concurrency","JVM basics"],["50 Java questions","2 coding problems","Review weak answers"]],
+["Spring rapid-fire",["IoC","Beans","REST","Validation","AOP","JPA","Transactions","Security"],["50 Spring questions","Debug 3 scenarios","Review notes"]],
+["Microservices/Kafka/AWS",["Gateway","Discovery","Resilience","Kafka","Redis","Docker","AWS","CI/CD"],["40 architecture questions","One microservices mock","One cloud mock"]],
+["React/JavaScript",["JS fundamentals","Promises","React","Hooks","Router","API integration","Auth","Performance"],["40 frontend questions","One React coding task","Review weak areas"]],
+["DSA timed round",["Arrays","Strings","Hashing","Stack","Linked list","Binary search","Recursion"],["2 timed rounds","Review every failure","Repeat weak patterns"]],
+["System design + project",["Estimation","Architecture","DB","Cache","Queue","Security","Project deep dive"],["2 system design mocks","Project walkthrough","Prepare trade-off answers"]],
+["Full mock interview",["HR intro","Java coding","Spring","Microservices","SQL","React","System design","Project","Salary/notice discussion"],["Complete 90-minute mock","Score yourself","Create final 7-day revision list"]]
+]]
 ];
 
-let currentWeek = Number(localStorage.getItem("currentWeek") || 0);
-let progress = JSON.parse(localStorage.getItem("javaFullStackProgress") || "{}");
-
-function key(w,d){return `w${w}d${d}`}
-function save(){localStorage.setItem("javaFullStackProgress",JSON.stringify(progress));localStorage.setItem("currentWeek",currentWeek)}
-function weekDone(w){return weeks[w][2].every((_,d)=>progress[key(w,d)])}
-function totals(){
- let total=weeks.length*7, done=Object.values(progress).filter(Boolean).length;
- return {total,done};
+let week=+localStorage.getItem("jfsWeek")||0, day=+localStorage.getItem("jfsDay")||0;
+let checked=JSON.parse(localStorage.getItem("jfsDetailedProgress")||"{}");
+const k=(w,d,i)=>`w${w}d${d}i${i}`;
+function save(){localStorage.setItem("jfsDetailedProgress",JSON.stringify(checked));localStorage.setItem("jfsWeek",week);localStorage.setItem("jfsDay",day)}
+function countAll(){let total=0,done=0;W.forEach((x,w)=>x[2].forEach((d,di)=>d[1].forEach((_,i)=>{total++;if(checked[k(w,di,i)])done++})));return{total,done}}
+function countWeek(w){let t=0,d=0;W[w][2].forEach((x,di)=>x[1].forEach((_,i)=>{t++;if(checked[k(w,di,i)])d++}));return{t,d}}
+function countDay(w,d){let t=W[w][2][d][1].length,dn=0;W[w][2][d][1].forEach((_,i)=>{if(checked[k(w,d,i)])dn++});return{t,d:dn}}
+function weekComplete(w){let c=countWeek(w);return c.t===c.d}
+function renderWeeks(){
+ let el=document.getElementById("weeks");el.innerHTML="";
+ W.forEach((x,i)=>{let b=document.createElement("button");b.className="week-btn"+(i===week?" active":"")+(weekComplete(i)?" done":"");b.textContent=`W${i+1}${weekComplete(i)?" ✓":""}`;b.onclick=()=>{week=i;day=0;conceptsOpen=false;save();render()};el.appendChild(b)})
 }
-function renderNav(){
- const nav=document.getElementById("weekNav"); nav.innerHTML="";
- weeks.forEach((w,i)=>{
-  const b=document.createElement("button"); b.className="week-btn"+(i===currentWeek?" active ":"")+(weekDone(i)?" done":"");
-  b.textContent=`Week ${i+1}${weekDone(i)?" ✓":""}`;
-  b.onclick=()=>{currentWeek=i;save();render()};
-  nav.appendChild(b);
- });
+function renderDays(){
+ let el=document.getElementById("days");el.innerHTML="";
+ W[week][2].forEach((x,i)=>{let b=document.createElement("button");b.className="day-tab"+(i===day?" active":"");let c=countDay(week,i);b.innerHTML=`Day ${i+1}<br><small>${c.d}/${c.t}</small>`;b.onclick=()=>{day=i;conceptsOpen=false;save();render()};el.appendChild(b)})
+}
+let conceptsOpen=false;
+function renderDay(){
+ let x=W[week][2][day], c=countDay(week,day), el=document.getElementById("dayContent");
+ let learn=x[1].map((t,i)=>`<label class="task"><input type="checkbox" ${checked[k(week,day,i)]?"checked":""} onchange="toggle(${week},${day},${i},this.checked)"><span>${t}</span></label>`).join("");
+ let coding=x[2][0].split("|").map(t=>`<label class="task"><input type="checkbox"><span>${t}</span></label>`).join("");
+ el.innerHTML=`<button class="day-header-btn ${conceptsOpen?"open":""}" onclick="toggleConcepts()" aria-expanded="${conceptsOpen}">
+   <span><strong style="font-size:18px">Day ${day+1}: ${x[0]}</strong><span class="concept-note">${conceptsOpen?"Click to hide today's detailed concepts":"Click to see exactly what concepts you should cover today"}</span></span>
+   <span class="badge">${c.d}/${c.t} done <span class="arrow">⌄</span></span>
+ </button>
+ <div class="concept-panel ${conceptsOpen?"":"hidden-panel"}">
+   <div class="section"><h4>📚 Exactly what to learn today</h4>${learn}</div>
+   <div class="two"><div class="section tip"><h4>💻 Practice / coding</h4>${coding}</div>
+   <div class="section interview"><h4>🎤 Interview target</h4><div style="font-size:14px;line-height:1.5">${x[2][1]}</div><p style="color:var(--muted);font-size:13px;margin-bottom:0">Say the answer aloud without notes. If you cannot explain it simply, revise the topic.</p></div></div>
+ </div>`;
+}
+function toggleConcepts(){conceptsOpen=!conceptsOpen;renderDay()}
+function renderOverview(){
+ let el=document.getElementById("overview");el.innerHTML="";
+ W[week][2].forEach((x,i)=>{let c=countDay(week,i),r=document.createElement("div");r.className="topic-row";r.innerHTML=`<input type="checkbox" ${c.d===c.t?"checked":""} onclick="jump(${i})"><div><strong>Day ${i+1}: ${x[0]}</strong><small>${c.d}/${c.t} detailed items completed</small></div>`;el.appendChild(r)})
 }
 function render(){
- renderNav();
- const w=weeks[currentWeek];
- document.getElementById("weekTitle").textContent=`Week ${currentWeek+1}: ${w[0]}`;
- document.getElementById("weekSubtitle").textContent=w[1];
- const grid=document.getElementById("dayGrid");grid.innerHTML="";
- const days=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
- w[2].forEach((topic,d)=>{
-  const div=document.createElement("div");div.className="day";
-  div.innerHTML=`<h3>${days[d]} · Day ${d+1}</h3>`;
-  const label=document.createElement("label");label.className="task";
-  const cb=document.createElement("input");cb.type="checkbox";cb.checked=!!progress[key(currentWeek,d)];
-  cb.onchange=()=>{progress[key(currentWeek,d)]=cb.checked;save();render()};
-  label.append(cb,document.createTextNode(topic));div.appendChild(label);grid.appendChild(div);
- });
- const list=document.getElementById("topicList");list.innerHTML="";
- w[2].forEach((t,d)=>{
-  const row=document.createElement("div");row.className="topic";
-  row.innerHTML=`<input type="checkbox" ${progress[key(currentWeek,d)]?"checked":""} onchange="toggle(${currentWeek},${d},this.checked)">
-    <div><strong>${t}</strong><small>${d<5?"Learn + practice":"Practice / revision"}</small></div>`;
-  list.appendChild(row);
- });
- const {total,done}=totals(), wp=w[2].filter((_,d)=>progress[key(currentWeek,d)]).length;
- document.getElementById("doneCount").textContent=done;document.getElementById("totalCount").textContent=total;
- document.getElementById("percent").textContent=Math.round(done/total*100)+"%";
- document.getElementById("weekPercent").textContent=Math.round(wp/7*100)+"%";
- document.getElementById("progressText").textContent=`${done} / ${total}`;
- document.getElementById("overallFill").style.width=(done/total*100)+"%";
+ renderWeeks();renderDays();renderDay();renderOverview();
+ document.getElementById("weekTitle").textContent=`Week ${week+1}: ${W[week][0]}`;
+ document.getElementById("weekSub").textContent=W[week][1];
+ let a=countAll(),wc=countWeek(week),dc=countDay(week,day);
+ document.getElementById("done").textContent=a.done;document.getElementById("total").textContent=a.total;
+ document.getElementById("pct").textContent=Math.round(a.done/a.total*100)+"%";
+ document.getElementById("wpct").textContent=Math.round(wc.d/wc.t*100)+"%";
+ document.getElementById("dpct").textContent=Math.round(dc.d/dc.t*100)+"%";
+ document.getElementById("count").textContent=`${a.done} / ${a.total}`;
+ document.getElementById("fill").style.width=(a.done/a.total*100)+"%";
 }
-function toggle(w,d,v){progress[key(w,d)]=v;save();render()}
-function markCurrentWeekDone(){
- weeks[currentWeek][2].forEach((_,d)=>progress[key(currentWeek,d)]=true);
- if(currentWeek<weeks.length-1) currentWeek++;
- save();render();
-}
-function resetAll(){
- if(confirm("Reset all 16 weeks?")){progress={};currentWeek=0;save();render()}
-}
+function toggle(w,d,i,v){checked[k(w,d,i)]=v;save();render()}
+function jump(d){day=d;conceptsOpen=false;save();render()}
+function completeDay(){W[week][2][day][1].forEach((_,i)=>checked[k(week,day,i)]=true);if(day<6)day++;conceptsOpen=false;save();render()}
+function completeWeek(){W[week][2].forEach((x,d)=>x[1].forEach((_,i)=>checked[k(week,d,i)]=true));if(week<W.length-1){week++;day=0}conceptsOpen=false;save();render()}
+function goToday(){save();render()}
+function resetAll(){if(confirm("Reset ALL detailed progress for all 16 weeks?")){checked={};week=0;day=0;conceptsOpen=false;save();render()}}
 render();
 </script>
 </body>

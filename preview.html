@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Java Full Stack — 16 Week Interview Tracker</title>
+<style>
+  :root{
+    --bg:#f5f7ff; --card:#fff; --text:#172033; --muted:#68738a;
+    --primary:#6c5ce7; --secondary:#00b894; --accent:#fd79a8;
+    --orange:#e17055; --blue:#0984e3; --yellow:#fdcb6e;
+    --border:#e9eaf3; --shadow:0 10px 30px rgba(40,45,80,.10);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:linear-gradient(135deg,#f7f8ff,#eefcff);color:var(--text)}
+  .hero{background:linear-gradient(135deg,#5f27cd,#0984e3 55%,#00b894);color:white;padding:32px 20px 38px}
+  .hero-inner{max-width:1180px;margin:auto}
+  h1{margin:0 0 8px;font-size:clamp(28px,5vw,46px)}
+  .hero p{margin:0;opacity:.9;font-size:16px}
+  .container{max-width:1180px;margin:-18px auto 50px;padding:0 16px}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .stat{background:var(--card);border-radius:18px;padding:18px;box-shadow:var(--shadow)}
+  .stat .num{font-size:28px;font-weight:800}.stat .label{color:var(--muted);font-size:13px;margin-top:3px}
+  .progress-card{margin-top:16px;background:white;border-radius:20px;padding:20px;box-shadow:var(--shadow)}
+  .progress-head{display:flex;justify-content:space-between;gap:12px;align-items:center;font-weight:700}
+  .bar{height:14px;background:#ececf6;border-radius:99px;overflow:hidden;margin-top:12px}
+  .fill{height:100%;width:0;background:linear-gradient(90deg,#6c5ce7,#00b894);border-radius:99px;transition:.35s}
+  .controls{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+  button{border:0;border-radius:12px;padding:10px 14px;font-weight:700;cursor:pointer}
+  .btn-primary{background:var(--primary);color:white}.btn-light{background:#f0efff;color:#5145b5}
+  .week-nav{display:flex;gap:8px;overflow:auto;margin:20px 0 12px;padding-bottom:4px}
+  .week-btn{background:white;color:#5d667a;box-shadow:0 3px 12px rgba(30,40,80,.07);min-width:86px}
+  .week-btn.active{background:var(--primary);color:white}
+  .week-btn.done{border:2px solid var(--secondary)}
+  .week-card{background:white;border-radius:22px;box-shadow:var(--shadow);overflow:hidden}
+  .week-header{padding:22px;background:linear-gradient(135deg,#f1edff,#e9fbff)}
+  .week-header h2{margin:0 0 5px}.week-header p{margin:0;color:var(--muted)}
+  .day-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;padding:18px}
+  .day{border:1px solid var(--border);border-radius:15px;padding:12px;min-height:145px;background:#fff}
+  .day.today{outline:3px solid #c8c1ff}
+  .day h3{margin:0 0 8px;font-size:13px;color:var(--primary)}
+  label.task{display:flex;gap:8px;align-items:flex-start;margin:9px 0;font-size:13px;line-height:1.35;cursor:pointer}
+  input[type=checkbox]{accent-color:var(--secondary);width:17px;height:17px;flex:none}
+  .topic-list{padding:0 18px 22px}
+  .topic-list h3{margin:4px 0 12px}
+  .topic{display:flex;gap:10px;align-items:flex-start;padding:11px 0;border-bottom:1px dashed #ddd}
+  .topic:last-child{border-bottom:0}.topic small{display:block;color:var(--muted);margin-top:2px}
+  .tag{display:inline-block;padding:3px 8px;border-radius:99px;font-size:11px;font-weight:800;background:#fff0f6;color:#d6336c;margin-left:5px}
+  .footer-note{margin-top:16px;color:var(--muted);font-size:13px;text-align:center}
+  @media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}.day-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.stats{grid-template-columns:1fr 1fr}.day-grid{grid-template-columns:1fr}.hero{padding-top:24px}}
+</style>
+</head>
+<body>
+<header class="hero"><div class="hero-inner">
+  <h1>🚀 Java Full Stack Mastery</h1>
+  <p>16 weeks • Learn → Build → Revise → Interview • Your progress is saved automatically.</p>
+</div></header>
+
+<main class="container">
+  <section class="stats">
+    <div class="stat"><div class="num" id="doneCount">0</div><div class="label">Topics completed</div></div>
+    <div class="stat"><div class="num" id="totalCount">0</div><div class="label">Total topics</div></div>
+    <div class="stat"><div class="num" id="percent">0%</div><div class="label">Overall progress</div></div>
+    <div class="stat"><div class="num" id="weekPercent">0%</div><div class="label">Current week</div></div>
+  </section>
+
+  <section class="progress-card">
+    <div class="progress-head"><span>🎯 4-Month Interview Goal</span><span id="progressText">0 / 0</span></div>
+    <div class="bar"><div class="fill" id="overallFill"></div></div>
+    <div class="controls">
+      <button class="btn-primary" onclick="markCurrentWeekDone()">Complete current week</button>
+      <button class="btn-light" onclick="resetAll()">Reset all progress</button>
+    </div>
+  </section>
+
+  <nav class="week-nav" id="weekNav"></nav>
+  <section class="week-card">
+    <div class="week-header">
+      <h2 id="weekTitle"></h2><p id="weekSubtitle"></p>
+    </div>
+    <div class="day-grid" id="dayGrid"></div>
+    <div class="topic-list"><h3>📚 Week topics</h3><div id="topicList"></div></div>
+  </section>
+  <div class="footer-note">💡 Missed a day? No problem. The tracker stays on the same week until you finish it. Never skip a week just because one day was missed.</div>
+</main>
+
+<script>
+const weeks = [
+["Java Foundations + DSA","Build strong core Java and problem-solving habits",[
+"Java syntax, variables, data types, operators","OOP: class, object, encapsulation, inheritance","Polymorphism, abstraction, interfaces","String, StringBuilder, StringBuffer","Arrays + two-pointer patterns","Big-O + 5 easy coding problems","Weekly revision + mock interview"]],
+["Collections + Modern Java","Master the collections and Java 8+ features interviewers expect",[
+"List, Set, Map internals","HashMap internals + hashing","equals/hashCode contract","Comparable vs Comparator","Java 8 lambdas + functional interfaces","Streams: map/filter/reduce/grouping","Optional + Date/Time + revision"]],
+["Advanced Java + Concurrency","Write efficient, thread-safe Java",[
+"Exception handling + custom exceptions","Generics + wildcards","Immutability + records","Threads, Runnable, Callable","synchronized, volatile, locks","ExecutorService + CompletableFuture","Concurrency interview questions + revision"]],
+["DSA Patterns","Become comfortable solving medium-level interview problems",[
+"Arrays + sliding window","Strings + frequency maps","Stack + queue","Linked list","Binary search","Recursion + backtracking basics","20-question timed mock"]],
+["SQL + Database","Become strong in SQL and relational database fundamentals",[
+"SELECT, WHERE, ORDER BY, GROUP BY","Joins: inner/left/right","Subqueries + CTE","Indexes + execution basics","Transactions + ACID","Normalization + isolation levels","SQL interview mock + 10 queries"]],
+["Spring Boot Core","Build production-style Spring Boot applications",[
+"Spring IoC + dependency injection","Bean lifecycle + scopes","Spring Boot auto-configuration","Configuration properties + profiles","REST controllers + DTOs","Validation + global exception handling","Actuator + revision"]],
+["Spring Data JPA + Hibernate","Master ORM and database integration",[
+"Entity mapping + relationships","Fetch types + cascade","JPQL + native queries","Transactions + @Transactional","N+1 problem + EntityGraph","Pagination + auditing","JPA/Hibernate interview mock"]],
+["Spring AOP + Security","Understand cross-cutting concerns and secure APIs",[
+"AOP concepts + proxies","Pointcut, advice, join point","Custom annotations + aspects","Spring Security architecture","Authentication vs authorization","JWT + role-based access","Security interview revision"]],
+["Microservices Fundamentals","Design and build reliable distributed services",[
+"Monolith vs microservices","Service discovery","API Gateway","OpenFeign + service communication","Resilience4j: retry/circuit breaker","Distributed configuration","Microservices interview mock"]],
+["Kafka + Redis","Learn asynchronous systems and caching",[
+"Kafka topics, partitions, offsets","Producer + consumer","Consumer groups","Delivery semantics + retries","Kafka ordering + idempotency","Redis caching + TTL","Kafka + Redis architecture revision"]],
+["AWS + Docker + CI/CD","Become cloud-ready for full-stack backend roles",[
+"Docker images + containers","Docker Compose","AWS IAM + S3","AWS RDS/Aurora basics","ECS/EKS concepts","CI/CD pipeline concepts","Deploy a Spring Boot service + revision"]],
+["React Foundations","Build the frontend layer confidently",[
+"HTML semantic basics","CSS flexbox + grid","JavaScript ES6 essentials","React components + JSX","Props + state + events","Hooks: useState + useEffect","Build a small CRUD UI"]],
+["React Advanced + Integration","Connect frontend and backend like a full-stack engineer",[
+"React Router","Forms + validation","Context API","API calls with fetch/Axios","Authentication flow + token handling","Performance + reusable components","Integrate React with Spring Boot API"]],
+["System Design","Learn to explain scalable systems in interviews",[
+"Requirements + estimation","Load balancing + caching","Database scaling + read replicas","Queues + async processing","URL shortener design","Chat application design","System design mock interview"]],
+["Projects + Resume","Turn knowledge into evidence",[
+"Choose one production-style project","Design DB + APIs","Implement Spring Boot backend","Add Kafka/Redis where useful","Build React frontend","Dockerize + deploy","Resume + project explanation practice"]],
+["Final Interview Sprint","Consolidate everything and simulate the real interview",[
+"Java rapid-fire revision","Spring Boot/JPA/AOP revision","Microservices/Kafka/AWS revision","React/JavaScript revision","DSA timed round","System design + project deep dive","Full mock interview + weak-area revision"]]
+];
+
+let currentWeek = Number(localStorage.getItem("currentWeek") || 0);
+let progress = JSON.parse(localStorage.getItem("javaFullStackProgress") || "{}");
+
+function key(w,d){return `w${w}d${d}`}
+function save(){localStorage.setItem("javaFullStackProgress",JSON.stringify(progress));localStorage.setItem("currentWeek",currentWeek)}
+function weekDone(w){return weeks[w][2].every((_,d)=>progress[key(w,d)])}
+function totals(){
+ let total=weeks.length*7, done=Object.values(progress).filter(Boolean).length;
+ return {total,done};
+}
+function renderNav(){
+ const nav=document.getElementById("weekNav"); nav.innerHTML="";
+ weeks.forEach((w,i)=>{
+  const b=document.createElement("button"); b.className="week-btn"+(i===currentWeek?" active ":"")+(weekDone(i)?" done":"");
+  b.textContent=`Week ${i+1}${weekDone(i)?" ✓":""}`;
+  b.onclick=()=>{currentWeek=i;save();render()};
+  nav.appendChild(b);
+ });
+}
+function render(){
+ renderNav();
+ const w=weeks[currentWeek];
+ document.getElementById("weekTitle").textContent=`Week ${currentWeek+1}: ${w[0]}`;
+ document.getElementById("weekSubtitle").textContent=w[1];
+ const grid=document.getElementById("dayGrid");grid.innerHTML="";
+ const days=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+ w[2].forEach((topic,d)=>{
+  const div=document.createElement("div");div.className="day";
+  div.innerHTML=`<h3>${days[d]} · Day ${d+1}</h3>`;
+  const label=document.createElement("label");label.className="task";
+  const cb=document.createElement("input");cb.type="checkbox";cb.checked=!!progress[key(currentWeek,d)];
+  cb.onchange=()=>{progress[key(currentWeek,d)]=cb.checked;save();render()};
+  label.append(cb,document.createTextNode(topic));div.appendChild(label);grid.appendChild(div);
+ });
+ const list=document.getElementById("topicList");list.innerHTML="";
+ w[2].forEach((t,d)=>{
+  const row=document.createElement("div");row.className="topic";
+  row.innerHTML=`<input type="checkbox" ${progress[key(currentWeek,d)]?"checked":""} onchange="toggle(${currentWeek},${d},this.checked)">
+    <div><strong>${t}</strong><small>${d<5?"Learn + practice":"Practice / revision"}</small></div>`;
+  list.appendChild(row);
+ });
+ const {total,done}=totals(), wp=w[2].filter((_,d)=>progress[key(currentWeek,d)]).length;
+ document.getElementById("doneCount").textContent=done;document.getElementById("totalCount").textContent=total;
+ document.getElementById("percent").textContent=Math.round(done/total*100)+"%";
+ document.getElementById("weekPercent").textContent=Math.round(wp/7*100)+"%";
+ document.getElementById("progressText").textContent=`${done} / ${total}`;
+ document.getElementById("overallFill").style.width=(done/total*100)+"%";
+}
+function toggle(w,d,v){progress[key(w,d)]=v;save();render()}
+function markCurrentWeekDone(){
+ weeks[currentWeek][2].forEach((_,d)=>progress[key(currentWeek,d)]=true);
+ if(currentWeek<weeks.length-1) currentWeek++;
+ save();render();
+}
+function resetAll(){
+ if(confirm("Reset all 16 weeks?")){progress={};currentWeek=0;save();render()}
+}
+render();
+</script>
+</body>
+</html>
